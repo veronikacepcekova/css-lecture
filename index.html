@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Úvod do CSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="container">
+    <h1>Úvod do CSS</h1>
+    <div class="section">
+        <h2>Cascading Style Sheets</h2>
+        <p>Kaskádové štýly - jedná sa o programovací jazyk pre vizuálnu štylizáciu výstupu kódu HTML. Neustále sa vyvýja
+            a pribúdajú nové možnosti štýlovania.</p>
+        <p>Niektore vlastnosti sú dedičné a potomkovia ich automaticky dedia od rodičov - color, font, ...</p>
+        <h3 class="warning">Pozor</h3>
+        <div class="warning-box">
+            Nie všetky prehliadače podporujú všetky vlastnosti. Pre použitie niektorých vlastností je potrebné vložiť
+            pred názov vlastnosti predponu. Existujú spôsoby automatického vytvárania štýlu s predponami.
+            <ul class="list">
+                <li>
+                    <strong>-webkit</strong> - prehliadač Chrome a Safari
+                </li>
+                <li>
+                    <strong>-moz</strong> - prehliadač Firefox
+                </li>
+            </ul>
+            <p>Podporu na prehliadačoch s overíš na <a href="https://caniuse.com/">Can I use</a></p>
+        </div>
+        <h3>Ukážka</h3>
+        <div class="example-box">
+            <ul class="list-style-none">
+                <li>-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);</li>
+                <li>-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);</li>
+                <li>box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Vloženie štýlov do kódu</h2>
+        <h3>Externé</h3>
+        <p>CSS sa píše v samostatnom súbore, ktorý sa následne pomocou
+            <link>
+            tagu vkladá do HTML
+        </p>
+        <div class="example-box">
+            <code>
+                &lt;link href="/style.css" rel="stylesheet"&gt;
+            </code>
+        </div>
+        <h3>Interné</h3>
+        <p>CSS sa píše priamo v HTML vo vnútry
+            <style></style>
+            tagu
+        </p>
+        <div class="example-box">
+            <code>
+                &lt;style&gt;
+                body {
+                background-color: lightblue;
+                }
+                &lt;/style&gt;
+            </code>
+        </div>
+        <h3>Inline</h3>
+        <p>CSS sa píše priamo v príslušnom tagu </p>
+        <div class="example-box">
+            <code>
+                &lt;h1 style="font-size: 40px; text-transform: uppercase"&gt; &lt;/h1&gt;
+            </code>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Resetovanie výchozích štýlov</h2>
+        <p>Niktoré tagy majú v niektorých prehliadačoch preddefinované vlastnosti. Tieto vlastnosti je vhodné na
+            začiatku zresetovať</p>
+        <div class="example-box">
+            <a href="https://meyerweb.com/eric/tools/css/reset/" target="_blank">Meyer CSS reset</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>CSS Selektori</h2>
+        <p>Aby bolo možné určitý tag naštýlovať je potrebné ho správne vyselektovať. Je možné vyselektovať samotný tag,
+            jeho potomkov alebo jeho súrodenca. <strong class="warning">Nie je možné selektovať rodičov!!!</strong>
+            Kaskádové štýly idú len cestou nadol, nikdy nie opačne.</p>
+        <p>Zoznam selektorov: <a href="https://www.w3schools.com/cssref/css_selectors.asp">Selektori</a></p>
+        <h3>Vybrané selektory:</h3>
+        <h4>Tag</h4>
+        <p>Selektovanie pomocou tagu využívame len v špeciálnych prípadoch. Tagy sa opakujú naprieč celý webom a
+            priradení vlastnosti tagu &lt;div&gt; sa naštýlujú všetky &lt;div&gt; tagy.</p>
+        <p><strong>Použitie:</strong> &lt;h1&gt; - &lt;h6&gt; - používanie jednotného štýl pre nadpisy rovnakej úrovne
+            napomáha jednoduchšej orientácii užívateľa na webe</p>
+        <div class="example-box">
+            <code>
+                h1 { <br>
+                font-size: 40px; <br>
+                text-transform: uppercase; <br>
+                }
+            </code>
+        </div>
+        <h4>Class</h4>
+        <p>Atribut class je najbežnejším a najvhodnejším selektorom, jeden tag môže mať viacero class a jednu class môže
+            mať viac tagov</p>
+        <div class="example-box">
+            <code>
+                .class { <br>
+                font-size: 40px; <br>
+                text-transform: uppercase; <br>
+                }
+            </code>
+        </div>
+        <h4>Id</h4>
+        <p>Atribut id je unikátnym selektorom, jeden tag môže mať len jeden id atribut a žiaden ďalší tag nesmie mať
+            rovnaký id atribut. Ako CSS selektor sa pre svoju unikátnosť využíva minimálne. Využíva sa ako kotva v
+            odkazoch alebo pre selektovanie v JavaScripte.</p>
+        <div class="example-box">
+            <code>
+                #id { <br>
+                font-size: 40px; <br>
+                text-transform: uppercase; <br>
+                }
+            </code>
+        </div>
+        <h4>:first-child / :last-child</h4>
+        <p>Pomocou týchto selektorov je možné vyselektovať prvého alebo posledného potomka daného rodiča.</p>
+        <div class="example-box">
+            <h5>HTML</h5>
+            <code>
+                &lt;ul&gt;<br>
+                &lt;li&gt; Prvý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Druhý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Tretí potomok &lt;/li&gt;<br>
+                &lt;li&gt; Posledný potomok &lt;/li&gt;<br>
+                &lt;/ul&gt;
+            </code>
+            <h5>CSS</h5>
+            <code>
+                li:first-child { <br>
+                color: #fff; <br>
+                }
+            </code>
+        </div>
+        <h4>:nth-child()</h4>
+        <p>Umožňuje vyselektovať akéhokoľvek potomka podľa jeho poradia. Bežne sa nepoužíva - potomkovia môžu
+            pribúdať/ubúdať a poradové číslo potom neodpovedá.</p>
+        <div class="example-box">
+            <h5>HTML</h5>
+            <code>
+                &lt;ul&gt;<br>
+                &lt;li&gt; Prvý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Druhý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Tretí potomok &lt;/li&gt;<br>
+                &lt;li&gt; Posledný potomok &lt;/li&gt;<br>
+                &lt;/ul&gt;
+            </code>
+            <h5>CSS</h5>
+            <code>
+                li:nth-child(3) { <br>
+                color: #fff; <br>
+                }
+            </code>
+        </div>
+        <h4>:nth-child(even), :nth-child(even),</h4>
+        <p>Umožňuje vyselektovať všetkých nepárnych / párnych potomkov.</p>
+        <div class="example-box">
+            <h5>HTML</h5>
+            <code>
+                &lt;ul&gt;<br>
+                &lt;li&gt; Prvý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Druhý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Tretí potomok &lt;/li&gt;<br>
+                &lt;li&gt; Posledný potomok &lt;/li&gt;<br>
+                &lt;/ul&gt;
+            </code>
+            <h5>CSS</h5>
+            <code>
+                li:nth-child(even) { <br>
+                color: #fff; <br>
+                }
+            </code>
+        </div>
+        <h3>Selektory je možné vzájomne kombinovať</h3>
+        <h4>Selektory oddelené medzerou</h4>
+        <p>Selektory oddelené medzerou odpovedajú zanoreniu jednotlivých tagov. Na začiatku rady je Rodič a na konci
+            posledný potomok</p>
+        <div class="example-box">
+            <h5>HTML</h5>
+            <code>
+                &lt;div id="container"&gt;<br>
+                &lt;div class="section"&gt; <br>
+                &lt;ul class="list"&gt; <br>
+                &lt;li&gt; Prvý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Druhý potomok &lt;/li&gt;<br>
+                &lt;li&gt; Tretí potomok &lt;/li&gt;<br>
+                &lt;li&gt; Posledný potomok &lt;/li&gt;<br>
+                &lt;/ul&gt;<br>
+                &lt;/div&gt;<br>
+                &lt;/div&gt;
+            </code>
+            <h5>CSS</h5>
+            <code>
+                #container .section .list li:last-child { <br>
+                color: #fff; <br>
+                }
+            </code>
+        </div>
+        <h4>Selektory oddelené čiarkou</h4>
+        <p>Selektory oddelené čiarkou sú samostatnými selektormi, ktoré majú rovnaký štýl.</p>
+        <div class="example-box">
+            <h5>HTML</h5>
+            <code>
+                &lt;div class="section"&gt; <br>
+                &lt;p class="paragraph"&gt; Prvý vyselektovaný prvok&lt;/p&gt;<br>
+                &lt;/div&gt;<br><br>
+                &lt;div class="container"&gt; <br>
+                &lt;h2&gt; Druhý vyselektovaný prvok&lt;/p&gt;<br>
+                &lt;/div&gt;<br>
+            </code>
+            <h5>CSS</h5>
+            <code>
+                .section .paragraph, container h2 { <br>
+                color: #fff; <br>
+                }
+            </code>
+        </div>
+        <h3>Sila selektorov</h3>
+        <p>Jednotlivé selektory majú rozdielnu silu a vzájomne sa prebíjajú. V prípade kombinácie selektrov sa ich sila
+            spočítava. V prípade selektorov s rovnakou silou, prevládne vlastnosť napísané neskôr v kóde.</p>
+        <ul>
+            <li><strong>Tag</strong> - najnižšia sila</li>
+            <li><strong>Class</strong> - silnejší</li>
+            <li><strong>ID</strong> - silnejší</li>
+            <li><strong>Inline štýl</strong> - prebije všetky ostatné selektory</li>
+            <li><strong>!important</strong> - nasilnejší, prepíše aj inline štýl. Je ho možné prepísať len ďalším
+                1important. Využíva sa len k krajných prípadoch (napr. prepísanie štýlu šablóny, utility)
+            </li>
+        </ul>
+        <div class="example-box">
+            <code>
+                div {color: blue;} <br>
+                .section {color: blue;} <br>
+                #test {color: blue;} <br>
+                &lt;div style="color: blue;"&gt; Inline štýl&lt;/div&gt; <br>
+                div {color: blue!important;}
+            </code>
+        </div>
+    </div>
+
+
+    <div class="section">
+        <h2>Jednotky</h2>
+        <p>Zoznám základných jednotiek, ktoré sa bežne používajú:</p>
+        <ul>
+            <li><strong>px</strong></li>
+            <li><strong>rem</strong> - jednotka relatívna k veľkosti písma na html tagu, zvyčajne 16px</li>
+            <li><strong>em</strong> - jednotka relatívna k veľkosti písma na selektovanom tagu, 2em = 2x veľkosť písma</li>
+            <li><strong>%</strong></li>
+            <li><strong>vh</strong> - jednotka relatívna k šírke výške</li>
+            <li><strong>vw</strong> - jednotka relatívna k šírke obrazovky</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Farby</h2>
+        <h3>Zápisy farieb</h3>
+        <ul>
+            <li>
+                <storng>black</storng>
+                - anglický názov farby - nepoužíva sa
+            </li>
+            <li>
+                <storng>#000000</storng>
+                - hexametrický zápis - najčastejšie sa používa
+            </li>
+            <li>
+                <storng>#000</storng>
+                - skrátený hexametrický zápis - možné použiť len pri farbách ktoré majú rovnaké dvojice (#aabbcc -&gt;
+                #abc)
+            </li>
+            <li>
+                <storng>rgb(0, 0, 0)</storng>
+                - rgba zápis (red, green, blue)
+            </li>
+            <li>
+                <storng>rgb(0, 0, 0, .5)</storng>
+                - rgba zápis (red, green, blue, alpha) - alpha vyjadruje stupeň priehladnosti 0 - 1 - používa sa pri
+                priehladných farbách
+            </li>
+            <li>
+                <storng>rgb(0, 0%, 0%)</storng>
+                - hsl zápis (hue, saturation, lightness)
+            </li>
+            <li>
+                <storng>rgb(0, 0%, 0%, .3)</storng>
+                - hsla(hue, saturation, lightness, alpha) - alpha vyjadruje stupeň priehladnosti 0 - 1
+            </li>
+        </ul>
+        <h3>Farba textu</h3>
+        <div class="example-box">
+            color: #23201F;
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Prefarby celý obsah webu na farbu z ukážky</li>
+                <li>Prefaby .warning na červenú farbu</li>
+                <li>Prefaby odkazy</li>
+            </ul>
+        </div>
+        <h3>Farba pozadia</h3>
+        <div class="example-box">
+            background color: #f7b901;
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Prefarby pozadie úlohových boxov na #f7b901 / rgb(247,185,1)</li>
+                <li>Prefarby pozadie boxov s príkladmi na #66b266 / rgb(102,178,102)</li>
+                <li>Prefarby pozadie boxov s varovaním na #ff4c4c / rgb(255,76,76)</li>
+                <li>Prefarby pozadie boxov s tipom na #620738 / rgb(98,7,56)</li>
+                <li>Všetkým boxom pridaj priehladnosť</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Font</h2>
+        <h3>Font family</h3>
+        <p>Je možné použiť voľne dotupné fonty, platené fonty, vytvorený font. Doporučujem používať <a
+                href="https://fonts.google.com/">google fonty</a>, široká paleta fontov na výber, možnosť použitia
+            naprieč rôznymi prehliadačmi. Pokiaľ sa rozhodneme pre výber fontu pri ktorom máme pochybnosti o jeho
+            vykreslení na všetkých prehliadačoch, je vhodné doplniť zástupný font alebo prípadne univerzány serif /
+            sans-serif.</p>
+        <div class="example-box">
+            font-family: arial, sans-serif;
+        </div>
+
+        <div class="task-box">
+            <ul>
+                <li>Vyber si ľubovoľný google font a použi ho na celý web</li>
+                <li>Vyber si ďalší ľubovoľný google font a použi ho na nadpisy</li>
+            </ul>
+        </div>
+
+        <h3>Font size</h3>
+        <p>Doporučená veľkosť bežného textu je 16px.</p>
+        <div class="example-box">
+            font-size: 1,5rem;
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Stanov celému webu veľkosť písma na 1rem</li>
+                <li>Stanov nadpisom ľubovoľné veľkosti</li>
+            </ul>
+        </div>
+
+        <h3>Font weight</h3>
+        <p>Hrúbka písma: </p>
+        <ul>
+            <li><strong>bold</strong></li>
+            <li><strong>bolder</strong></li>
+            <li><strong>normal</strong></li>
+            <li><strong>thiner</strong></li>
+            <li><strong>thin</strong></li>
+            <li><strong>100 - 900</strong></li>
+        </ul>
+        <div class="example-box">
+            font-weight: 600;
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Stanov nadpisom h1 a h2 hrúbku písma na 700</li>
+                <li>Textu v boxom s úlohami hrúbku bolder</li>
+            </ul>
+        </div>
+
+        <h3>Font style</h3>
+        <p>Štýl písma písma: </p>
+        <ul>
+            <li><strong>normal</strong></li>
+            <li><strong>italic</strong></li>
+            <li><strong>oblique</strong></li>
+        </ul>
+        <div class="example-box">
+            font-style: normal;
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Nadpisy úrovne H4 nakloň</li>
+            </ul>
+        </div>
+
+        <h3>Font</h3>
+        <p>Jednotlivé vlastnosti písma je možné napísať hromadne pod vlastnosť font - kvoli prehladnosti sa nepoužíva,
+            vlastnosti sa zvyčajne rozpisujú. </p>
+        <div class="example-box">
+            font: italic small-caps bold 1rem Georgia, serif;
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Text</h2>
+        <h3>Text align</h3>
+        <p>Zarovnanie textu voči <strong>rodičovi.</strong></p>
+        <ul>
+            <li><strong>left</strong></li>
+            <li><strong>center</strong></li>
+            <li><strong>right</strong></li>
+        </ul>
+        <div class="example-box">
+            text-align: center;
+        </div>
+
+        <div class="task-box">
+            <ul>
+                <li>Zarovnej nadpisy H1 a H2 na stred.</li>
+            </ul>
+        </div>
+        <h3>Text decoration</h3>
+        <p>"Ozdobenie" textu</p>
+        <p>Pomocou: text-decoration-color, text-decoration-line je možné naštýlovať samotné ozdobenie</p>
+        <ul>
+            <li><strong>overline</strong></li>
+            <li><strong>line-through</strong></li>
+            <li><strong>underline</strong></li>
+        </ul>
+        <div class="example-box">
+            text-decoration: underline;
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Ľubovoľne ozdob nadpisy H3</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Width / Height</h2>
+        <h3>Width</h3>
+        <p>Potomok má obyčajne šírku rodiča (display: block). Je možné stanoviť presnú šírku, minimálnu a maximálnu.
+            Stanovenie šírky:</p>
+        <ul>
+            <li><strong>v jednotkách</strong></li>
+            <li><strong>auto</strong></li>
+        </ul>
+        <div class="example-box">
+            min-width: 2px <br>
+            width: 50rem; <br>
+            max-width: 100%; <br>
+        </div>
+
+        <div class="task-box">
+            <ul>
+                <li>Stanov maximálnu šírku obalovacieho divu na 1140px.</li>
+            </ul>
+        </div>
+        <h3>Height</h3>
+        <p>Je možné stanoviť presnú výšku, minimálnu a maximálnu. Stanovenie výšky:</p>
+        <ul>
+            <li><strong>v jednotkách</strong></li>
+            <li><strong>auto</strong></li>
+        </ul>
+        <div class="example-box">
+            min-height: 30rem <br>
+            height: 150rem; <br>
+            max-height: 100%; <br>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Padding / Border / Margin</h2>
+        <img src="images/layout.png">
+        <p>Okolo každého objektu je možné stanoviť rozostupy</p>
+        <h3>Padding</h3>
+        <p>Vnútorný rozostup - je súčasťou daného objektu - započítava sa do šírky a výšky. Rozostup sa stanovuje:</p>
+        <ul>
+            <li><strong>v jednotkách</strong></li>
+        </ul>
+        <div class="example-box">
+            padding: 20rem 10rem 15rem 30rem - hodnoty sú stanovené do kolečka v smere hodinových ručičiek o vrchu -
+            vrchný, pravý, spodný, ľavý <br>
+            padding: 20rem 10rem - vrchný a spodný rozostup bude 20rem, pravý a ľavý bude 10rem <br>
+            padding: 20rem 10rem 15rem - vrchný rozostup bude 20rem, pravý bude 10rem spodný 15rem a ľavý bude tiež
+            10rem <br>
+            padding: 20rem - zo všetkých strán daného objektu bude rozostup 20rem <br>
+            <br>
+            padding-top: 10rem; <br>
+            padding-right: 10rem; <br>
+            padding-bottom: 10rem; <br>
+            padding-left: 10rem; <br>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Všetkým farebným boxom vrchný a spodný padding 2rem a bočný padding 1.75rem</li>
+            </ul>
+        </div>
+
+        <h3>Border</h3>
+        <p>Ohraničenie objektu. Nachadza sa na hranici objektu medzi marginom a paddingom. Je možné stanoviť pre všetky
+            strany alebo len pre niektorú. Štýlujeme hrúbku, prevedenie a farbu a zaoblenie. Ak chceme, aby ma objekt kruhový tvar vytvoríme štvorec nastavíme border-radius na 50%</p>
+        <div class="example-box">
+            border: 1px solid #fff<br>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Všetkým farebným boxom naštýluj ohraničenie vo farbe daného boxu, ale bez priehladnosti</li>
+                <li>Všetkým farebným boxom naštýluj mierne zaoblen0 rohy</li>
+            </ul>
+        </div>
+
+        <h3>Margin</h3>
+        <p>Vonkajší rozostup - nie je súčasťou daného objektu. Rozostup sa stanovuje:</p>
+        <ul>
+            <li><strong>v jednotkách</strong></li>
+            <li><strong>auto</strong> pokiaľ poznáme šírku objektu je ho možné pomocou margin auto horizontálne
+                vycentrovať.
+            </li>
+        </ul>
+        <div class="example-box">
+            margin: 20rem 10rem 15rem 30rem - hodnoty sú stanovené do kolečka v smere hodinových ručičiek o vrchu -
+            vrchný, pravý, spodný, ľavý <br>
+            margin: 20rem 10rem - vrchný a spodný rozostup bude 20rem, pravý a ľavý bude 10rem <br>
+            margin: 20rem 10rem 15rem - vrchný rozostup bude 20rem, pravý bude 10rem spodný 15rem a ľavý bude tiež 10rem
+            <br>
+            margin: 20rem - zo všetkých strán daného objektu bude rozostup 20rem <br>
+            <br>
+            margin-top: 10rem; <br>
+            margin-right: 10rem; <br>
+            margin-bottom: 10rem; <br>
+            margin-left: 10rem; <br>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Všetkým farebným boxom vrchný a spodný margin 20px.</li>
+                <li>Obalovací div vycentruj pomocou marginu.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Display</h2>
+        <p>pomocou štýlu display ovplyvňujeme spôsob zobrazenie prvkov. Niektoré tagy majú preddefinované výchozie
+            zobrazenie.</p>
+        <ul>
+            <li><strong>block</strong> - objekt má 100% šírku svojho rodiča, pokiaľ vykreslíme za sebou dva takéto
+                objekty, každý sa vykreslí na samostatnom riadku
+            </li>
+            <li><strong>inline</strong> - objekt má šírku podľa svojho obsahu, nie je možné mu stanoviť výšku a šírku,
+                pokiaľ vykreslíme za sebou dva takéto objekty, vykreslia sa v jednom riadku
+            </li>
+            <li><strong>inline-block</strong> - objekt sa chová ako inline objekt, ale je mu možné stanoviť výšku a
+                šírku
+            </li>
+            <li><strong>flex</strong> vysvetlíme si v samostatnej kapitole</li>
+            <li><strong>none</strong> objekt sa nevykreslí</li>
+        </ul>
+        <div class="example-box">
+            display: inline-block;
+        </div>
+    </div>
+    <div class="section">
+        <h2>Visibility</h2>
+        <p>Slúži pre zobrazenie / skrytie objektu</p>
+        <ul>
+            <li><strong>visible</strong></li>
+            <li><strong>hidden</strong></li>
+        </ul>
+        <div class="example-box">
+            vissibility: hidden;
+        </div>
+    </div>
+    <div class="section">
+        <h2>Opacity</h2>
+        <p>Priehladnosť zobrazenia v rozmedzí 0 až 1</p>
+        <ul>
+            <li><strong>0</strong> - plná priehladnosť, objekt nie je vidno</li>
+            <li><strong>1</strong> - plná nepriehladnosť, objekt je zcela vidno</li>
+        </ul>
+        <div class="example-box">
+            opacity: .5;
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Display none / visibility hidden / Opacity 0</h2>
+        <p>Všetky tri vlastnosti spôsobujú nezobrazenie objektu. Je medzi nimi rozdiel?</p>
+        <div class="task-box">
+            <ul>
+                <li>Pod zadaním sa nachádzajú 3 objekty, obalovaciemu objektu daj zobrazenie flex</li>
+                <li>Objekty naštýluj (farba pozadia, padding, margin)</li>
+                <li>Prvému objektu nastav display: none a skontroluj, čo sa stalo</li>
+                <li>Druhému objektu nastav visibility: hidden a skontroluj, čo sa stalo. Zaznamenal si rozdiel?</li>
+                <li>Tretiemu objektu nastav opacity:0 a skontroluj, čo sa stalo. Zaznamenal si rozdiel?</li>
+                <li>Všetky 3 objekty obsahujú v sebe odkaz, dá sa naň kliknúť?</li>
+                <li>Nastav .answer-box display:block -> je potrebné prepísať inline štýl</li>
+            </ul>
+        </div>
+
+        <div class="Test-box">
+            <div class="box-display"><a href="/">Display none</a></div>
+            <div class="box-visibility"><a href="/">Visibility hidden</a></div>
+            <div class="box-opacity"><a href="/">Opacity 0</a></div>
+        </div>
+
+        <div class="answer-box example-box" style="display: none">
+            <ul>
+                <li>Display none - objekt nie je vidno, na webe sa nevykreslí (nemá zachované miesto), nie je možné naň
+                    kliknúť
+                </li>
+                <li>Visibility hidden - objekt nie je vidno, na webe sa vykreslí (má zachované miesto), nie je možné naň
+                    kliknúť
+                </li>
+                <li>Opacity 0 - objekt nie je vidno, na webe sa vykreslí (má zachované miesto), je možné naň kliknúť
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Display flex</h2>
+        <p>Jedná sa o relatívne novinku, ktorá významných spôsobom uľahčuje vertikálne a horizontálne zarovnanie
+            objektov v rodičovi. Problematika display flex je pomerne rozsiahla, pre jej pochopenie a plné využívanie
+            doporučejm prejsť <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"> CSS-tricks Flexbox</a>.
+        </p>
+        <h3>Štýly rodiča</h3>
+        <h4>Display</h4>
+        <div class="example-box">
+            <ul>
+                <li>Display: flex</li>
+            </ul>
+        </div>
+        <h4>Flex-direction</h4>
+        <div class="example-box">
+            <ul>
+                <li><strong>flex-direction: row</strong> - potomkovia sa vykreslia v jednom riadku, aj keď majú display:
+                    block
+                </li>
+                <li><strong>flex-direction: column</strong>- potomkovia sa vykreslia v stĺpci</li>
+            </ul>
+        </div>
+
+        <h4>Justify-content</h4>
+        <p>Upravuje zarovnanie potomkov voči sebe.</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>justify-content: flex-start</strong> -potomkovia sa zarovnajú na začiatok rodiča</li>
+                <li><strong>justify-content: flex-end</strong> -potomkovia sa zarovnajú na koniec rodiča</li>
+                <li><strong>justify-content: center</strong> -potomkovia sa zarovnajú na stred rodiča</li>
+                <li><strong>justify-content: space-between</strong> -medzi potomkami sa vytvoria rovnomerné medzery.
+                    Prvý potomok je zarovnaný na začiaku rodiča, posledný na koniec rodiča
+                </li>
+                <li><strong>justify-content: space-around</strong> -medzi potomkami sa vytvoria rovnomerné medzery</li>
+            </ul>
+        </div>
+
+        <h4>Align-items</h4>
+        <p>Upravuje zarovnanie potomkov voči rodičovi</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>align-items: flex-start</strong> -potomkovia sa zarovnajú na začiatok rodiča</li>
+                <li><strong>align-items: flex-end</strong> -potomkovia sa zarovnajú na koniec rodiča</li>
+                <li><strong>align-items: center</strong> -potomkovia sa zarovnajú na stred rodiča</li>
+            </ul>
+        </div>
+        <h3>Štýly potomkov</h3>
+        <p>Je možné zarovnať aj samostatne jednotlivých potomkov - samoštúdium</p>
+
+        <div class="task-box">
+            <ul>
+                <li>Pod zadaním sa nachádzajú ukážkové objekty, obalovaciemu objektu daj zobrazenie flex, nastav mu
+                    farbu pozadia a min. spodný margin
+                </li>
+                <li>Objekty naštýluj (farba pozadia, padding, margin)</li>
+                <li>Obom skupinám nastav zobrazenie flex</li>
+                <li>Jednej skupine nastav zarovnanie do riadku a druhej do stĺpca</li>
+                <li>Na oboch skupinách si vyskúšaj vlastnosť justify-content, align-items</li>
+            </ul>
+        </div>
+
+        <div class="flex-box flex-box-1">
+            <div class="box-display">Child 1</div>
+            <div class="box-visibility">Child 2</div>
+            <div class="box-opacity">Child 3</div>
+            <div class="box-opacity">Child 4</div>
+        </div>
+
+        <div class="flex-box flex-box-2">
+            <div class="box-display">Child 1</div>
+            <div class="box-visibility">Child 2</div>
+            <div class="box-opacity">Child 3</div>
+            <div class="box-opacity">Child 4</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Position</h2>
+        <p>Pozícia objektu</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>static</strong> - defaltná hodnota, objekt sa vykreslí v takom poradí aké ma v kóde</li>
+                <li><strong>relativ</strong> - objekt má pozíciu relatívnu voči svojej bežnej pozícii</li>
+                <li><strong>absolut</strong> - obejkt má relatívnu pozíciu voči prvému rodičovy, ktorý nemá pozíciu static</li>
+                <li><strong>fixed</strong> - obejkt má relatívnu pozíciu voči prehliadaču</li>
+            </ul>
+        </div>
+        <p>Presnú pozíciu stanovujeme pomocou:</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>top</strong></li>
+                <li><strong>right</strong></li>
+                <li><strong>bottom</strong></li>
+                <li><strong>left</strong></li>
+            </ul>
+        </div>
+        <div class="tip-box">
+            <h3>Tip</h3>
+            <p>Pokiaľ chceme objekt s position:absolut vycentrovať na stred je dobré použiť na relevantného rodiča display:flex</p>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Pod zadaním sa nachádzajú ukážkové objekty, obalovaciemu objektu nastav farbu pozadia a min. spodný margin</li>
+                <li>Objekty naštýluj (farba pozadia, padding, margin)</li>
+                <li>Objektom priraď danú pozíciu a nastav ľubovoľne hodnoty top, right, bottom, left a všimni si ako sa vykreslia</li>
+                <li>Obalovaciemu objektu nastav position:relativ. Nie+co sa zmenilo</li>
+                <li>Na oboch skupinách si vyskúšaj vlastnosť justify-content, align-items</li>
+            </ul>
+        </div>
+        <div class="position-box">
+            <div class="box-static">Position static</div>
+            <div class="box-relative">Position relative</div>
+            <div class="box-absolut">Position absolut</div>
+            <div class="box-fixed">Position fixed</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Obrázky</h2>
+        <h3>Rozmer obrázkov</h3>
+        <p>Pokiaľ chceme vykresliť obrázok so zachovaním pomeru strán, nastavíme požadovanú výsku alebo šírku a druhý rozmer stanovíme na auto</p>
+        <p>Pokiaľ chceme vykresliť vykresliť obrázok v presnom rozmere bez toho aby sa zdeformoval použijeme:</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>object-fit: cover;</strong> - defaltná hodnota, objekt sa vykreslí v takom poradí aké ma v kóde</li>
+                <li><strong>object-position: 50% 50%;</strong> - defaltná hodnota, objekt sa vykreslí v takom poradí aké ma v kóde</li>
+            </ul>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Na testovacích obrázkoch si vyskúšaj rozdielne vykreslenie</li>
+            </ul>
+        </div>
+        <div>
+            <img src="images/test.jpg">
+            <img src="images/test_2.jpg">
+        </div>
+
+        <h3>Obrázky na pozadí</h3>
+        <p>Okrem farby je možné stanoviť ako pozadie aj obrázok. Pri obrázkoch na pozadí nastavujeme:</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>background-image:</strong> - cesta k obrázku</li>
+                <li><strong>background-position:</strong> - pozícia obrázka cover/contain</li>
+                <li><strong>background-repeat:</strong> - opakovanie obrázka</li>
+            </ul>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>.img-box nastav testovací obrázok ako pozadie a naštýluj ho</li>
+            </ul>
+        </div>
+        <div class="img-box"></div>
+    </div>
+
+    <div class="section">
+        <h2>Hover</h2>
+        <p>Pri niektoré objekty chceme, aby po tom, co na ne užívateľ nascrolluje myš zmenili štýl a tým dali užívateľovi najavo, že je možné na ne kliknúť - button, link</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>.link:hover</strong> </li>
+            </ul>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Naštýluj odkazov hover stav</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Pseudo-elemnty</h2>
+        <p>Sú to elementy vytvorené len za pomoci css bez HTML, je nutné aby mali rodiča. Je potrebné aby mali pozíciu absolut a content. Využíva sa napr. na stanovenie filtra cez obrázok, aby bolo vidno text</p>
+        <div class="example-box">
+            <ul>
+                <li><strong>.parent::before</strong></li>
+                <li><strong>.parent::after</strong></li>
+            </ul>
+        </div>
+        <div class="task-box">
+            <ul>
+                <li>Naštýluj obalovací div obrázka - stanov mu výšku a šírku, naštýluj obrázok</li>
+                <li>Stanov textu position: absolute a umiestni ho do ľavého spodného rohu</li>
+                <li>Pomocou psedoelementu ::after, vytvor cez obrázok filter.</li>
+            </ul>
+        </div>
+        <div class="img-wrap">
+            <img src="images/test.jpg">
+            <p>Text cez obrázok</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Media Queries</h2>
+        <p>Služia k naštýlovaniu webu pre rôzne zariadenia - mobil, tablet, desktop</p>
+        <code>
+            @media only screen and (max-width: 600px) { <br>
+            body { <br>
+            background-color: lightblue; <br>
+            } <br>
+            } <br>
+        </code>
+        <div class="tip-box">
+            <ul>
+                <li>Extra small devices (phones, 600px and down)<br>@media only screen and (max-width: 600px) {...}</li>
+                <li>Small devices (portrait tablets and large phones, 600px and up)<br>  @media only screen and (min-width: 600px) {...}</li>
+                <li>Medium devices (landscape tablets, 768px and up)<br>@media only screen and (min-width: 768px) {...}</li>
+                <li>Large devices (laptops/desktops, 992px and up)<br>@media only screen and (min-width: 992px) {...}</li>
+                <li>Extra large devices (large laptops and desktops, 1200px and up)<br>@media only screen and (min-width: 1200px) {...}</li>
+            </ul>
+        </div>
+        <div></div>
+    </div>
+
+
+    <div class="section">
+        <h2>Domáca úloha</h2>
+        <div class="task-box">
+            <ul>
+                <li>Vytvoriť si vlastný grafický životopis, inšpirovať sa môžeš <a href="http://cv.veronikazavrelova.sk/" target="_blank">mojím životopisom</a>.</li>
+            </ul>
+        </div>
+        <div class="tip-box">
+         <ul>
+             <li>Nájdi si na webe pekný grafický životopis a snaž sa ho nakódovať.</li>
+             <li>Rozdeľ si ho na komponenty a kóduj postupne.</li>
+             <li>Na naštýlovanie rovnakých vecí používaj rovnaké classy.</li>
+             <li>Ak chceš svoj životopis vyšperkovať vytvor si aj jazykovú mutáciu. Zduplikuj súbor index.html a nazvy ho napr. en.html. V index.html obal prepínač do AJ odkazom a do href daj cestu k súboru en.html a opačne.</li>
+         </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
